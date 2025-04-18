@@ -56,3 +56,41 @@ Contributions are welcome! If you find a bug or have suggestions for improvement
 
 ## License
 This project is licensed under the MIT License.
+
+
+
+
+
+Design Patterns Used in the Project
+## Creational Patterns
+### Singleton Pattern
+Applied to all @Service, @Repository, and @Controller classes.
+Ensures a single shared instance managed by Spring's IoC container.
+Example: ExpenseService, MainController.
+
+### Factory Method Pattern
+Used internally by Spring for dependency injection.
+Creates beans and injects dependencies without exposing instantiation logic.
+Hide object creation; Spring injects dependencies. 
+Example: @Autowired fields in @Service classes.
+
+## Structural Patterns
+### Facade Pattern
+Service classes act as facades over data access and business logic.
+Simplifies controller interaction.
+Example: ExpenseService, UserService.
+
+### Adapter Pattern (via DTOs)
+DTOs adapt between domain models and the UI layer.
+Helps in form handling, validation, and decoupling.
+Example: ExpenseDTO, WebUser.
+
+## Behavioral Patterns
+### Template Method Pattern
+Overridden methods follow a predefined algorithm structure.
+Example: CustomeAuthenticationSuccessHandler overrides onAuthenticationSuccess().
+
+### Strategy Pattern (implicit)
+Filtering logic in ExpenseService.findFilterResult() can vary based on FilterDTO.
+Suggests extensibility through a formal strategy implementation.
+findFilterResult(FilterDTO)

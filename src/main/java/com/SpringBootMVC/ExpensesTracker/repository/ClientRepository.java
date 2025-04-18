@@ -1,8 +1,13 @@
 package com.SpringBootMVC.ExpensesTracker.repository;
 
-import com.SpringBootMVC.ExpensesTracker.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ClientRepository extends JpaRepository<Client, Integer> {
+import com.SpringBootMVC.ExpensesTracker.entity.Client;
 
+// public interface ClientRepository extends JpaRepository<Client, Integer> {
+
+// }
+
+public interface ClientRepository extends JpaRepository<Client, Integer> {
+    Client findByEmail(String email);
 }

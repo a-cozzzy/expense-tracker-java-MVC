@@ -23,4 +23,5 @@ public class CategoryServiceImpl implements CategoryService {
     public Category findCategoryById(int id) {
         return categoryRepository.findById(id).orElse(null);
     }
+
 }

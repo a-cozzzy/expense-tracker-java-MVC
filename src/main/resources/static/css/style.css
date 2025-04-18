@@ -22,7 +22,7 @@
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #1abc9c;
+  --bs-primary: rgb(49 128 190);
   --bs-secondary: #2c3e50;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
@@ -65,7 +65,16 @@
   --bs-link-hover-color: #15967d;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
+  --bs-body-bg: #001f3f;           /* Dark blue background */
+  --bs-body-color: #e0f2f7;        /* Light blue-ish text */
+  --bs-border-color: #4a648c;      /* Darker blue border */
+  --bs-primary: #5dade2;           /* Light blue for primary elements */
+  --bs-secondary: #283747;         /* Darker secondary background */
+  --bs-link-color: #a7d4f4;        /* Light blue for links */
+  --bs-link-hover-color: #cde6f7;   /* Lighter blue on hover */
+  --bs-gray-dark: #d0dce2;         /* Light gray for dark gray text */
 }
+
 
 *,
 *::before,

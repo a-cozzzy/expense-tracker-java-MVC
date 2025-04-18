@@ -26,7 +26,7 @@
 <!-- Navigation-->
 <div th:replace="fragments/navbar :: navbar('no', 'no', 'no', 'yes', 'yes', 'yes')"></div>
 <!-- Masthead-->
-<header class="masthead bg-primary text-white">
+<header class="masthead rgb(49 128 190) text-white">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Heading-->
         <h3 class="masthead-heading text-uppercase mb-0" style="margin-top: -55px;">Add Expense</h3>
@@ -45,7 +45,8 @@
                     <div class="form-group">
                         <!-- Dropdown List for Expense Categories -->
                         <label for="expenseCategory"><h6>Expense Category :</h6></label>
-                        <select id="expenseCategory" name="expenseCategory" style="width: 32%; margin-left: 20px;" th:field="*{category}">
+                        <!-- <select id="expenseCategory" name="expenseCategory" style="width: 32%; margin-left: 20px;" th:field="*{category}"> -->
+                        <select id="expenseCategory" style="width: 32%; margin-left: 20px;" th:field="*{category}">
                             <option value="groceries">Groceries</option>
                             <option value="Utilities(bills)">Utilities (bills)</option>
                             <option value="transportation">Transportation</option>
