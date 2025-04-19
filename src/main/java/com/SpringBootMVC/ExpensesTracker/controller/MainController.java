@@ -40,11 +40,20 @@ public class MainController {
         return "landing-page";
     }
 
+    // @GetMapping("/showAdd")
+    // public String addExpense(Model model){
+    //     model.addAttribute("expense", new ExpenseDTO());
+    //     return "add-expense";
+    // }
+
     @GetMapping("/showAdd")
-    public String addExpense(Model model){
-        model.addAttribute("expense", new ExpenseDTO());
+    public String addExpense(Model model) {
+        List<Category> categories = categoryService.getAllCategories();  // Get all categories
+        model.addAttribute("categories", categories);           // Add to model
+        model.addAttribute("expense", new ExpenseDTO());        // Add empty ExpenseDTO
         return "add-expense";
     }
+
 
     @PostMapping("/submitAdd")
     public String submitAdd(@ModelAttribute("expense") ExpenseDTO expenseDTO, HttpSession session){
@@ -104,27 +113,90 @@ public class MainController {
         return "list-page";
     }
 
+    // @GetMapping("/showUpdate")
+    // public String showUpdate(@RequestParam("expId") int id, Model model) {
+    //     System.out.println("Received ID: " + id);
+
+    //     Expense expense = expenseService.findExpenseById(id);
+    //     if (expense == null) {
+    //         System.out.println("Expense not found with ID: " + id);
+    //         throw new RuntimeException("Expense not found.");
+    //     }
+
+    //     ExpenseDTO expenseDTO = new ExpenseDTO();
+    //     expenseDTO.setAmount(expense.getAmount());
+
+    //     if (expense.getCategory() != null) {
+    //         expenseDTO.setCategory(expense.getCategory().getName());
+    //     } else {
+    //         System.out.println("Category is null for expense ID: " + id);
+    //         expenseDTO.setCategory("unknown");
+    //     }
+
+    //     expenseDTO.setDescription(expense.getDescription());
+
+    //     expenseDTO.setDateTime(expense.getDateTime());
+
+    //     model.addAttribute("expense", expenseDTO);
+    //     model.addAttribute("expenseId", id);
+    //     return "update-page";
+    // }
     @GetMapping("/showUpdate")
-    public String showUpdate(@RequestParam("expId") int id, Model model){
+    public String showUpdate(@RequestParam("expId") int id, Model model) {
+        System.out.println("Received ID: " + id);
+    
         Expense expense = expenseService.findExpenseById(id);
+        if (expense == null) {
+            System.out.println("Expense not found with ID: " + id);
+            throw new RuntimeException("Expense not found.");
+        }
+    
         ExpenseDTO expenseDTO = new ExpenseDTO();
         expenseDTO.setAmount(expense.getAmount());
-        expenseDTO.setCategory(expense.getCategory().getName());
+    
+        if (expense.getCategory() != null) {
+            expenseDTO.setCategory(expense.getCategory().getName());
+        } else {
+            System.out.println("Category is null for expense ID: " + id);
+            expenseDTO.setCategory("unknown");
+        }
+    
         expenseDTO.setDescription(expense.getDescription());
         expenseDTO.setDateTime(expense.getDateTime());
-
+    
+        // Add all categories to the model for the dropdown
+        List<Category> categories = categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
+    
         model.addAttribute("expense", expenseDTO);
         model.addAttribute("expenseId", id);
+    
         return "update-page";
     }
+    
 
+    // @PostMapping("/submitUpdate")
+    // public String update(@RequestParam("expId") int id, @ModelAttribute("expense") ExpenseDTO expenseDTO, HttpSession session){
+    //     Client client = (Client) session.getAttribute("client");
+    //     expenseDTO.setExpenseId(id);
+    //     expenseDTO.setClientId(client.getId());
+    //     expenseService.update(expenseDTO);
+    //     return "redirect:/list";
+    // }
+    
     @PostMapping("/submitUpdate")
     public String update(@RequestParam("expId") int id, @ModelAttribute("expense") ExpenseDTO expenseDTO, HttpSession session){
         Client client = (Client) session.getAttribute("client");
+
+        // Ensure that the expenseDTO is correctly populated with the selected category
+        Category category = categoryService.findCategoryByName(expenseDTO.getCategory()); // Find the Category by its name
         expenseDTO.setExpenseId(id);
         expenseDTO.setClientId(client.getId());
+        expenseDTO.setCategory(category.getName());
+        // Set the correct category from the dropdown selection
+
         expenseService.update(expenseDTO);
-        return "redirect:/list";
+        return "redirect:/list";  // Redirect after the update
     }
 
     @GetMapping("/delete")

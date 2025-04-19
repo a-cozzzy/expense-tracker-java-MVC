@@ -46,7 +46,7 @@
                         <!-- Dropdown List for Expense Categories -->
                         <label for="expenseCategory"><h6>Expense Category :</h6></label>
                         <!-- <select id="expenseCategory" name="expenseCategory" style="width: 32%; margin-left: 20px;" th:field="*{category}"> -->
-                        <select id="expenseCategory" style="width: 32%; margin-left: 20px;" th:field="*{category}">
+                        <!-- <select id="expenseCategory" style="width: 32%; margin-left: 20px;" th:field="*{category}">
                             <option value="groceries">Groceries</option>
                             <option value="Utilities(bills)">Utilities (bills)</option>
                             <option value="transportation">Transportation</option>
@@ -55,7 +55,12 @@
                             <option value="shopping">Shopping</option>
                             <option value="travel">Travel</option>
                             <option value="education">Education</option>
+                        </select> -->
+
+                        <select id="expenseCategory" style="width: 32%; margin-left: 20px;" th:field="*{category}">
+                            <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}"></option>
                         </select>
+                        
                     </div>
                     <br>
                     <div class="form-group">
@@ -80,8 +85,8 @@
     </div>
 </header>
 <!-- Copyright Section-->
-<div class="copyright py-4 text-center text-white">
-</div>
+<!-- <div class="copyright py-4 text-center text-white">
+</div> -->
 
 
 <!-- Bootstrap core JS-->
